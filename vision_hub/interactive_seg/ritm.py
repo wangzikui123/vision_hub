@@ -51,25 +51,16 @@ class ritm_segmenter:
         num_clicks = len(clicks_list)
         pred_mask = pred > self.PROB_THRESH
         
-        # visualization code
-        # draw = vis.draw_with_blend_and_clicks(img, mask=mask, clicks_list=clicks_list)
-        # draw = np.concatenate((draw,
-        #     255 * pred_mask[:, :, np.newaxis].repeat(3, axis=2),
-        #     255 * (mask > 0)[:, :, np.newaxis].repeat(3, axis=2)
-        # ), axis=1)
-        
         return pred_mask, num_clicks
 
     def get_prediction_from_click(self, is_positive, coords):
-        
         click = Click(is_positive=is_positive, coords=coords)
         self.clicks_list.append(click)
         clicker = Clicker(init_clicks=[click])
         with torch.no_grad():
             pred_probs = self.predictor.get_prediction(clicker)
             pred_mask = pred_probs > self.PROB_THRESH
-        ious_list = [] 
-        
+        self.pred_mask = pred_mask
         draw = vis.draw_with_blend_and_clicks(self.annotating_image, mask=pred_mask, clicks_list=self.clicks_list)
         return draw
 
