@@ -25,10 +25,10 @@ from isegm.inference.clicker import Click
 class ritm_segmenter:
     def __init__(self, ritm_dir=ritm_dir, PROB_THRESH=0.49):
         device = torch.device('cpu')
-        cfg = exp.load_config_file(os.path.join(ritm_dir, 'config.yml'), return_edict=True)
+
         self.PROB_THRESH = PROB_THRESH
 
-        model_dir = os.path.join(ritm_dir, cfg.INTERACTIVE_MODELS_PATH)
+        model_dir = os.path.join(ritm_dir, "../../../../../weights")
 
         checkpoint_path = ritm_utils.find_checkpoint(model_dir, 'coco_lvis_h18s_itermask')
         model = ritm_utils.load_is_model(checkpoint_path, device)

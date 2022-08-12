@@ -48,7 +48,7 @@ class aot_segmenter:
         exp_name = 'AOT Tool'
         stage = 'pre_ytb_dav'
         model = 'aotb'
-        ckpt_path = os.path.join(base_dir, './pretrain_models/AOTB_PRE_YTB_DAV.pth')
+        ckpt_path = os.path.join(base_dir, '../../../../../weights/AOTB_PRE_YTB_DAV.pth')
         gpu_id = gpu_id
         data_path = os.path.join(base_dir, './datasets/Demo')
         output_path = os.path.join(base_dir, './demo_output')
